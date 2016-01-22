@@ -12,8 +12,14 @@
 
 <p>
   <strong>Brewery:</strong>
-  <%= @beer.brewery_id %>
+  <%= @beer.brewery.name %>
 </p>
+
+<% if @beer.ratings.empty? %>
+    <p>Beer has not yet been rated!</p>
+<% else %>
+    <p>Beer has <%= @beer.rating %> ratings, average <%= @beer.average_rating %></p>
+<% end %>
 
 <p>
   <%= link_to 'List of breweries', breweries_path %>
