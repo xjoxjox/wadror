@@ -7,10 +7,10 @@ class Beer < ActiveRecord::Base
   end
 
   def average_rating
-    @yht = 0
-    ratings.where(beer_id:self.id).each do |rate|
-      @yht += rate.score
-    end
-    @yht.to_f / self.rating
+    ratings.where(beer_id:self.id).average(:score).round(2)
+  end
+
+  def to_s
+    self.name + ", " + self.brewery.name
   end
 end

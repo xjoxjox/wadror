@@ -8,6 +8,7 @@
 b1 = Brewery.create name:"Koff", year:1897
 b2 = Brewery.create name:"Malmgard", year:2001
 b3 = Brewery.create name:"Weihenstephaner", year:1042
+b4 = Brewery.create name:"BrewDog", year:2007
 
 b1.beers.create name:"Iso 3", style:"Lager"
 b1.beers.create name:"Karhu", style:"Lager"
@@ -16,3 +17,14 @@ b2.beers.create name:"Huvila Pale Ale", style:"Pale Ale"
 b2.beers.create name:"X Porter", style:"Porter"
 b3.beers.create name:"Hefeweizen", style:"Weizen"
 b3.beers.create name:"Helles", style:"Lager"
+b4.beers.create name:"Punk IPA", style:"IPA"
+b4.beers.create name:"Nanny State", style:"lowalcohol"
+
+Rating.create score:33, beer_id:1
+Rating.create score:35, beer_id:1
+Rating.create score:12, beer_id:1
+Rating.create score:14, beer_id:8
+Rating.create score:9, beer_id:8
+Rating.create score:17, beer_id:9
+Rating.create score:44, beer_id:9
+Rating.create score:20, beer_id:9
