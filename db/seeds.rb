@@ -28,3 +28,11 @@ Rating.create score:9, beer_id:8
 Rating.create score:17, beer_id:9
 Rating.create score:44, beer_id:9
 Rating.create score:20, beer_id:9
+
+u1 = User.create name:"bisse"
+u3 = User.create name:"kaljaman"
+u4 = User.create name:"testiuser"
+
+d1 = BeerClub.create name:"Hyvä Pössis", founded:1980, city:"Vantaa"
+d3 = BeerClub.create name:"Kaljan Kittaajat", founded:2015, city:"Tampere"
+d4 = BeerClub.create name:"Kova Meininki", founded:1899, city:"Rovaniemi"
