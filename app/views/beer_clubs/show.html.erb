@@ -13,7 +13,7 @@ Founded <%= @beer_club.founded %>
 
     <ul>
       <% @beer_club.members.each do |member| %>
-          <li> <%= link_to member.username, user_path(member.username) %> </li>
+          <li> <%= link_to member.username, user_path(member) %> </li>
       <% end %>
     </ul>
 <% end %>
