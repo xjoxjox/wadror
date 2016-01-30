@@ -1,6 +1,6 @@
 class BeerClub < ActiveRecord::Base
-  has_many :memberships
-  has_many :members, -> { uniq }, through: :memberships, source: :user
+  has_many :memberships, dependent: :destroy
+  has_many :members, -> { distinct }, through: :memberships, source: :user
   validates :name, presence: true
   validates :city, presence: true
   validates :founded, numericality: { greater_than_or_equal_to: 1600,
