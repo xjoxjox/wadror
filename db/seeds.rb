@@ -20,15 +20,6 @@ b3.beers.create name:"Helles", style:"Lager"
 b4.beers.create name:"Punk IPA", style:"IPA"
 b4.beers.create name:"Nanny State", style:"lowalcohol"
 
-Rating.create score:33, beer_id:1
-Rating.create score:35, beer_id:1
-Rating.create score:12, beer_id:1
-Rating.create score:14, beer_id:8
-Rating.create score:9, beer_id:8
-Rating.create score:17, beer_id:9
-Rating.create score:44, beer_id:9
-Rating.create score:20, beer_id:9
-
 u1 = User.create name:"bisse"
 u3 = User.create name:"kaljaman"
 u4 = User.create name:"testiuser"
