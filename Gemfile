@@ -51,6 +51,7 @@ group :development, :test do
   gem 'launchy', :group => :test
   gem 'rspec-its', :group => :test
   gem 'simplecov', require: false
+  gem 'travis'
 end
 
 group :production do

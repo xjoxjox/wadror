@@ -1,14 +1,19 @@
 language: ruby
-
 rvm:
- - 2.1.5
-
+- 2.1.5
 script:
- - bundle install
- - bundle exec rake db:migrate --trace
- - RAILS_ENV=test bundle exec rake db:migrate --trace
- - bundle exec rake db:test:prepare
- - bundle exec rspec -fd spec/
-
+- bundle install
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
 gemfile:
-  - /ratebeer/Gemfile
+- "/ratebeer/Gemfile"
+deploy:
+  provider: heroku
+  api_key:
+    secure: FEGJ7FVfxK/7fq6NhM4BmfhMisaDUWRsgrqLTZEor34Tm8tgT1/SyEXPcWliyzQK8fOaGBDmD9pAuwT98U7hnq5xwubwXB7g546ANFj/3dRNMEzmtj8iruvjB4h0x17ImgQheA4CJM2yCkDuLp0yIn508dAxFo2NvDw9S7LlUNCC9Wkv40YjjUBMDMH8OH42n/HQ8tCq48henkldaJ0rNAnlMuZ/t8U+QSL/wluU9N4SFV+5TxOfOr1Ysz+YD+KuL76bAYI6z/nE9YEWOJBpDKvd4q04qexdjO1xzuvUGB2iqyS8rAHXXtE+2R7ikVtTZf2Afdd8PXVe4hAIM5QlzNC1cVi5+63JI33/M13buVDSdZCqLq9S5w23e5wPyTLJqBV67HwS1zv7uuOs6/kIDLm0o3OyiOKNFmOjYsDTl5XV4TOfSOfxh7RUw9bYKZcqntpiIxkgPIxso6u9fH4Pn35NHG75BByQbISkkIMT4Iiu8TgrLKcffQWbjfccNSedyNFa5hP+Fg+I3HOUolUsvEFFrsspJGOmGgdS79EAXcVj/K0sKgRZ/46Cb9exNoIYKNsgrf30E40wfw1Ks+pgFP6+hyk3wmQCGKev3DE3JKnr8spEvDc1w4A3kyJj5+DjjuQYaE8hQvGRlfV6DtzwgoiRDTm9npWz0BkMjxs3Khg=
+ 
+  run:
+    - "rake db:migrate"
+    - restart
