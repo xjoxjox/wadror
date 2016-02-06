@@ -17,5 +17,7 @@ deploy:
   app: xjoxjox-ratebeer
 
   run:
+    - git add -A
+    - git commit -m "deploy"
     - "rake db:migrate"
     - restart
