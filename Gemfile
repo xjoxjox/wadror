@@ -45,11 +45,20 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem "better_errors"
+  gem 'rspec-rails', '~> 3.0'
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'factory_girl_rails', :group => :test
+  gem 'capybara', :group => :test
+  gem 'launchy', :group => :test
+  gem 'rspec-its', :group => :test
+  gem 'simplecov', require: false
 end
 
 group :production do
    gem 'pg'
    gem 'rails_12factor'
+   gem 'rspec-rails', '~> 3.0'
 end
 
 gem 'bcrypt', '~> 3.1.7'
