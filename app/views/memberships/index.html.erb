@@ -15,8 +15,6 @@
         <td><%= membership.beer_club_id %></td>
         <td><%= membership.user_id %></td>
         <td><%= link_to 'Show', membership %></td>
-        <td><%= link_to 'Edit', edit_membership_path(membership) %></td>
-        <td><%= link_to 'Destroy', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Membership', new_membership_path %>
+<%= link_to 'New Membership', new_membership_path  if current_user %>

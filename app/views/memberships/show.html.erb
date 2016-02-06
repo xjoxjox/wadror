@@ -10,5 +10,6 @@
   <%= @membership.user_id %>
 </p>
 
-<%= link_to 'Edit', edit_membership_path(@membership) %> |
-<%= link_to 'Back', memberships_path %>
+<%= link_to 'Edit', edit_membership_path if current_user %>
+<%= link_to 'Destroy', @membership, method: :delete, data:
+    { confirm: 'Are you sure?' } if current_user %>

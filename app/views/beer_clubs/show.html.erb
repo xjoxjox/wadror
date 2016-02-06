@@ -18,4 +18,6 @@ Founded <%= @beer_club.founded %>
     </ul>
 <% end %>
 
-<%= link_to 'Edit', edit_beer_club_path(@beer_club) %>
+<%= link_to 'Edit', edit_beer_club_path if current_user %>
+<%= link_to 'Destroy', @beer_club, method: :delete, data:
+    { confirm: 'Are you sure?' } if current_user %>

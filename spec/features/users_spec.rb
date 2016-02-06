@@ -5,10 +5,6 @@ include Helpers
 describe "User" do
   let!(:user) { FactoryGirl.create :user }
 
-  before :each do
-
-  end
-
   describe "who has signed up" do
     it "can signin with right credentials" do
       sign_in(username:"Pekka", password:"Foobar1")

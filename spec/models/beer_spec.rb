@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Beer, type: :model do
+
   it "is saved if name and style are set" do
     beer = Beer.create name:"Pintti", style:"Lager"
 
