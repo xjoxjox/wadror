@@ -17,5 +17,8 @@ deploy:
   app: xjoxjox-ratebeer
 
   run:
+    - git remote add -A
+    - git remote commit -m "travis"
+    - git push heroku master
     - "rake db:migrate"
     - restart
