@@ -1,0 +1,47 @@
+<style>
+  #map {
+    width: 500px;
+    height: 400px;
+    background-color: #CCC;
+  }
+</style>
+
+
+<p id="notice"><%= notice %></p>
+
+<h2><%= session[params[:id]+"_name"] %></h2>
+
+<p id="street"><%= session[params[:id]+"_street"] %></p>
+<p id="locality"><%= session[params[:id]+"_zip"] %>
+<%= session[params[:id]+"_city"] %></p>
+<p id="country">  <%= session[params[:id]+"_country"] %></p>
+
+<script src="http://maps.google.com/maps/api/js?sensor=false"
+        type="text/javascript"></script>
+
+<div id="map" style="width: 400px; height: 300px;"></div>
+
+<script type="text/javascript">
+
+  var address = '<%= session[params[:id]+"_street"] %>, <%= session[params[:id]+"_zip"] %> <%= session[params[:id]+"_city"] %>';
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    mapTypeId: google.maps.MapTypeId.TERRAIN,
+    zoom: 14
+  });
+  var geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode({
+        'address': address
+      },
+      function(results, status) {
+        if(status == google.maps.GeocoderStatus.OK) {
+          new google.maps.Marker({
+            position: results[0].geometry.location,
+            map: map
+          });
+          map.setCenter(results[0].geometry.location);
+        }
+      });
+
+</script>
