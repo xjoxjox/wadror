@@ -52,6 +52,7 @@ group :development, :test do
   gem 'rspec-its', :group => :test
   gem 'simplecov', require: false
   gem 'travis'
+  gem 'webmock', :group => :test
 end
 
 group :production do
@@ -61,5 +62,6 @@ group :production do
 end
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'httparty'
 
 ruby '2.1.5'
