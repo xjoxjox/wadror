@@ -11,11 +11,6 @@ script:
 gemfile:
 - "/ratebeer/Gemfile"
 
-after_success:
-    - git remote add -A
-    - git remote commit -a "travis"
-    - git push heroku master
-
 deploy:
   provider: heroku
   api_key:
