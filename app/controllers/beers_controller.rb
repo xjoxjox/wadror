@@ -35,8 +35,7 @@ class BeersController < ApplicationController
         format.html { redirect_to beers_path, notice: 'Beer was successfully created.' }
         format.json { render :show, status: :created, location: @beer }
       else
-        @breweries = Brewery.all
-        @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter"]
+        set_breweries_and_styles_for_template
         format.html { render :new }
         format.json { render json: @beer.errors, status: :unprocessable_entity }
       end
@@ -51,6 +50,7 @@ class BeersController < ApplicationController
         format.html { redirect_to @beer, notice: 'Beer was successfully updated.' }
         format.json { render :show, status: :ok, location: @beer }
       else
+        set_breweries_and_styles_for_template
         format.html { render :edit }
         format.json { render json: @beer.errors, status: :unprocessable_entity }
       end

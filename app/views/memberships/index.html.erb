@@ -12,8 +12,8 @@
   <tbody>
     <% @memberships.each do |membership| %>
       <tr>
-        <td><%= membership.beer_club_id %></td>
-        <td><%= membership.user_id %></td>
+        <td><%= membership.beer_club.name %></td>
+        <td><%= membership.user.username %></td>
         <td><%= link_to 'Show', membership %></td>
       </tr>
     <% end %>
