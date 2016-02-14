@@ -26,10 +26,8 @@ ActiveRecord::Schema.define(version: 20160214112305) do
     t.integer  "brewery_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "style_id",   default: 1, null: false
+    t.integer  "style_id"
   end
-
-  add_index "beers", ["style_id"], name: "index_beers_on_style_id"
 
   create_table "breweries", force: true do |t|
     t.string   "name"

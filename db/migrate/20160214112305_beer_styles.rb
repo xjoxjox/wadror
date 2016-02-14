@@ -7,7 +7,7 @@ class BeerStyles < ActiveRecord::Migration
     Beer.pluck(:old_style).uniq.each do |s|
       Style.create(:name => s, :description => "")
     end
-    add_reference :beers, :style, index: true, foreign_key: true
+    add_reference :beers, :style, foreign_key: true
     Beer.reset_column_information
     Beer.all.each do |b|
       b.style_id = Style.find_by(:name => b.old_style).id

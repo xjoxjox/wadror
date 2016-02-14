@@ -5,11 +5,7 @@ class Beer < ActiveRecord::Base
   has_many :ratings, dependent: :destroy
   has_many :raters, -> { uniq }, through: :ratings, source: :user
   validates :name, presence: true
-  validate :must_have_style
-
-  def must_have_style
-    !self.style_id.nil?
-  end
+  validates :style_id, numericality: { only_integer: true }
 
   def to_s
     self.name + ", " + self.brewery.name
