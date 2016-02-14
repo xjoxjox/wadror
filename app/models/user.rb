@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
 
   def favorite_style
     return nil if ratings.empty?
-    h = Beer.joins(:ratings).select("beers.style, ratings.score").group(:style).average(:score)
-    h.key(h.values.max)
+    h = Beer.joins(:ratings).select("beers.style_id, ratings.score").group(:style_id).average(:score)
+    Style.find_by(id: h.key(h.values.max)).name
   end
 
   def favorite_brewery

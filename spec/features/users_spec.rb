@@ -51,8 +51,10 @@ describe "User" do
   def create_breweries_beers_ratings
     FactoryGirl.create :brewery, name:"Koff"
     FactoryGirl.create :brewery, name:"Olvi"
-    FactoryGirl.create :beer, style:"Lager", brewery_id:1
-    FactoryGirl.create :beer, style:"IPA", brewery_id:2
+    FactoryGirl.create :style, name:"Lager"
+    FactoryGirl.create :style, name:"IPA"
+    FactoryGirl.create :beer, style_id:1, brewery_id:1
+    FactoryGirl.create :beer, style_id:2, brewery_id:2
     FactoryGirl.create :rating2, beer_id:1, user_id:1
     FactoryGirl.create :rating2, beer_id:1, user_id:1
     FactoryGirl.create :rating, beer_id:2, user_id:1
