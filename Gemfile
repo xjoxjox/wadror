@@ -38,6 +38,8 @@ gem 'therubyracer', platforms: :ruby
 
 gem 'coffee-script-source', '1.8.0'
 
+gem 'bootstrap-sass'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
@@ -53,6 +55,7 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'travis'
   gem 'webmock', :group => :test
+  gem 'rails_layout'
 end
 
 group :production do
