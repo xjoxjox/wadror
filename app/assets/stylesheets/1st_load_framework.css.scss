@@ -29,13 +29,19 @@ img {
 .submit {
   @extend .btn;
   @extend .btn-primary;
-  @extend .btn-lg;
   }
+
+h1, h2, p {
+  font-family: "Cambria", Times, serif;
+}
+ul.list-unstyled {
+  width: 400px;
+}
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #eee;
+  background-color: #caeeda;
   padding-bottom: 80px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar

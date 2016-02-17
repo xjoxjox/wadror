@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h2>
   <%= @user.username %></strong>
 </h2>
@@ -25,11 +23,11 @@
   <strong>Ratings</strong>
 </p>
 
-<ul>
+<ul class="list-unstyled">
   <% @user.ratings.each do |rating| %>
     <li> <%= rating %>
       <% if @user == current_user %>
-        <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+        <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %> </li>
       <% end %>
   <% end %>
 </ul>
@@ -40,12 +38,12 @@
       <strong>Member of BeerClubs</strong>
     </p>
 
-    <ul>
+    <ul class="list-unstyled">
       <% @user.beer_clubs.each do |beer_club| %>
           <li> <%= link_to beer_club.name, beer_club_path(beer_club)%> </li>
       <% end %>
     </ul>
 <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) if current_user %>
-<%= link_to 'delete', @user, method: :delete, data: { confirm: 'Are you sure?' } if current_user %>
+<%= link_to 'Edit', edit_user_path(@user), class:"btn btn-primary" if current_user %>
+<%= link_to 'delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" if current_user %>

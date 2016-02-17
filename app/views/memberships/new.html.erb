@@ -16,5 +16,5 @@
     <%= f.select :beer_club_id,
                  options_from_collection_for_select(@beer_clubs, :id, :to_s, selected:@membership.beer_club_id) %>
     <%= f.hidden_field :user_id, :value => current_user.id%>
-<%= f.submit %>
+<%= f.submit class:"btn btn-primary" %>
 <% end %>

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h2><%= @style.name %></h2>
 
 <p>
@@ -7,7 +5,7 @@
 </p>
 
 <% unless @style.beers.empty? %>
-  <ul>
+  <ul class="list-unstyled">
     <% @style.beers.each do |beer| %>
       <li> <%= link_to beer.name, beer %> by <%= link_to beer.brewery.name, beer.brewery %> </li>
     <% end %>
@@ -15,6 +13,6 @@
 <% end %>
 
 <% if current_user %>
-  <%= link_to 'Edit', edit_style_path(@style) %> |
-  <%= link_to 'Destroy', @style, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Edit', edit_style_path(@style), class:"btn btn-primary" %> |
+  <%= link_to 'Destroy', @style, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
 <%end %>

@@ -4,10 +4,14 @@
   Number of ratings: <%= @ratings.count %>
 </p>
 
-<ul>
+<ul class="list-unstyled">
   <% @ratings.each do |rating| %>
-      <li> <%= rating %> <%= link_to rating.user.username, user_path(rating.user) %> </li>
+      <li>
+        <%= link_to rating.beer.name, beer_path(rating.beer),
+                    class:"btn btn-link" %> <strong><%= rating.score %></strong>
+        <%= link_to rating.user.username, user_path(rating.user),
+                    class:"btn btn-link" %> </li>
   <% end %>
 </ul>
 
-<%= link_to 'New Rating', new_rating_path if current_user %>
+<%= link_to 'New Rating', new_rating_path, class:"btn btn-primary" if current_user %>
