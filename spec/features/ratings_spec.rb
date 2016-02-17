@@ -25,8 +25,6 @@ describe "Rating" do
     expect(user.ratings.count).to eq(1)
     expect(beer1.ratings.count).to eq(1)
     expect(beer1.average_rating).to eq(15.0)
-
-    save_and_open_page
   end
 
   it "shows number of ratings at ratings page" do
@@ -38,8 +36,6 @@ describe "Rating" do
     expect(page).to have_content 'iso 3 10'
     expect(page).to have_content 'Karhu 20'
     expect(page).to have_content 'iso 3 20'
-
-    save_and_open_page
   end
 
   it "shows users ratings at users page" do
@@ -53,8 +49,6 @@ describe "Rating" do
     expect(page).to have_content 'Karhu 20'
     expect(page).to have_content 'iso 3 20'
     expect(page).not_to have_content 'iso 3 15'
-
-    save_and_open_page
   end
 
   it "deletes users rating" do

@@ -29,8 +29,6 @@ ActiveRecord::Schema.define(version: 20160217142201) do
     t.integer  "style_id"
   end
 
-  add_index "beers", ["style_id"], name: "index_beers_on_style_id"
-
   create_table "breweries", force: true do |t|
     t.string   "name"
     t.integer  "year"
