@@ -1,6 +1,6 @@
 class CreateStyles < ActiveRecord::Migration
   def change
-    unless :styles
+    unless table_exists? :styles
       create_table :styles do |t|
         t.string :name
         t.text :description
