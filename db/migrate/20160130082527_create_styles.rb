@@ -1,10 +1,10 @@
 class CreateStyles < ActiveRecord::Migration
   def change
-    create_table :styles do |t|
-      t.string :name
-      t.text :description
+    #create_table :styles do |t|
+     #t.string :name
+     #t.text :description
 
-      t.timestamps
-    end
+     #t.timestamps
+    # end
   end
 end
