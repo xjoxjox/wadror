@@ -1,5 +1,6 @@
 <h1>Listing styles</h1>
 
+<% if @styles %>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -7,15 +8,14 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-<% if @styles %>
   <tbody>
     <% @styles.each do |style| %>
       <tr>
         <td><%= link_to style.name, style %></td>
     <% end %>
   </tbody>
-<% end %>
 </table>
+<% end %>
 
 <br>
 

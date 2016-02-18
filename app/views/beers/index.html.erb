@@ -1,6 +1,7 @@
 <h1>Listing beers</h1>
 <p> Number of beers: <%= @beers.count %> </p>
 
+<% unless @beers.nil? %>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -10,7 +11,7 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-<% unless @beers.nil? %>
+
   <tbody>
     <% @beers.each do |beer| %>
       <tr>
@@ -20,9 +21,8 @@
       </tr>
     <% end %>
   </tbody>
-<% end %>
 </table>
-
+<% end %>
 <br>
 
 <%= link_to('New Beer', new_beer_path, class:'btn btn-primary') if current_user %>
