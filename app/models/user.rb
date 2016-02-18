@@ -18,12 +18,22 @@ class User < ActiveRecord::Base
   def favorite_style
     return nil if ratings.empty?
     h = Beer.joins(:ratings).select("beers.style_id, ratings.score").group(:style_id).average(:score)
-    Style.find_by(id: h.key(h.values.max)).name
+    Style.find_by(id: h.key(h.values.max))
   end
 
   def favorite_brewery
     return nil if ratings.empty?
     h = Brewery.joins(:ratings, :beers).select("breweries.name, ratings.score").group("breweries.name").average(:score)
-    h.key(h.values.max)
+    Brewery.find_by(name: h.key(h.values.max))
+  end
+
+  def most_active_users(n)
+    h = User.joins(:ratings).select("users.username, rating.user_id").group(:username).count(:user_id).sort_by {|k,v| v}.reverse[0..n]
+    hash = {}
+    h.each do |key, value|
+      u = User.find_by(:username => key)
+      hash[u] = value
+    end
+    hash
   end
 end

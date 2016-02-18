@@ -9,7 +9,7 @@ Founded <%= @beer_club.founded %>
 <% if @beer_club.members %>
     <strong>Members</strong>
 
-    <ul>
+    <ul class="list-unstyled">
       <% @beer_club.members.each do |member| %>
           <li> <%= link_to member.username, user_path(member) %> </li>
       <% end %>
@@ -30,6 +30,4 @@ Founded <%= @beer_club.founded %>
   <% end %>
 <% end %>
 
-<%= link_to 'Edit', edit_beer_club_path, class:"btn btn-primary" if current_user %>
-<%= link_to 'Destroy', @beer_club, method: :delete, data:
-    { confirm: 'Are you sure?' }, class:"btn btn-danger" if current_user %>
+<%= edit_and_destroy_buttons(@beer_club) if current_user %>

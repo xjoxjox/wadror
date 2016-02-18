@@ -8,6 +8,4 @@
   <%= @membership.user_id %>
 </p>
 
-<%= link_to 'Edit', edit_membership_path, class:"btn btn-primary" if current_user %>
-<%= link_to 'Destroy', @membership, method: :delete, data:
-    { confirm: 'Are you sure?' }, class:"btn btn-danger" if current_user %>
+<%= edit_and_destroy_buttons(@membership) if current_user %>

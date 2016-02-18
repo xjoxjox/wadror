@@ -1,17 +1,65 @@
-<h2>List of ratings</h2>
+<div class="row">
+  <div class="col-sm-9">
+    <h2>Ratings</h2>
+    Number of ratings: <%= @ratings.count %>
+    <div class="row">
+      <div class="col-sm-4">
+        <h3>Best beers</h3>
+        <%= render 'list', top: @top_beers, target: "beer" %>
+      </div>
+      <div class="col-sm-4">
+        <h3>Best breweries</h3>
+        <%= render 'list', top: @top_breweries, target: "brewery" %>
+      </div>
+      <div class="col-sm-4">
+        <h3>Best styles</h3>
+        <%= render 'list', top: @top_styles, target: "style" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-9">
+        <h3>Most active users</h3>
+        <% unless @top_raters.nil? %>
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th></th>
+                <th>Favorite beer</th>
+                <th>Preferred style</th>
+                <th>Favorite brewery</th>
+                <th>Ratings</th>
+              </tr>
+              </thead>
 
-<p>
-  Number of ratings: <%= @ratings.count %>
-</p>
+              <tbody>
+              <% @top_raters.each do |key, value| %>
+                  <tr>
+                    <td><%= link_to key.username, user_path(key) %></td>
+                    <td><%= link_to key.favorite_beer.name, beer_path(key.favorite_beer) %></td>
+                    <td><%= link_to key.favorite_style.name, style_path(key.favorite_style) %></td>
+                    <td><%= link_to key.favorite_brewery.name, brewery_path(key.favorite_brewery) %></td>
+                    <td><%= round(value) %></td>
+                    <td></td>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-9">
+        <h3>Recent ratings</h3>
+        <ul class="list-unstyled">
+            <% @recent.each do |r| %>
+              <li> <%= link_to r.beer.name, beer_path(r.beer) %> <%= r.score %>
+                <%= link_to r.user.username, user_path(r.user) %> </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-<ul class="list-unstyled">
-  <% @ratings.each do |rating| %>
-      <li>
-        <%= link_to rating.beer.name, beer_path(rating.beer),
-                    class:"btn btn-link" %> <strong><%= rating.score %></strong>
-        <%= link_to rating.user.username, user_path(rating.user),
-                    class:"btn btn-link" %> </li>
-  <% end %>
-</ul>
 
 <%= link_to 'New Rating', new_rating_path, class:"btn btn-primary" if current_user %>
