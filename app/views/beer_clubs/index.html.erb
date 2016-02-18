@@ -9,7 +9,7 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
+<% unless @beer_clubs.nil? %>
   <tbody>
 
   <% @beer_clubs.each do |beer_club| %>
@@ -21,6 +21,7 @@
   <% end %>
 
   </tbody>
+<% end %>
 </table>
 
 <br>

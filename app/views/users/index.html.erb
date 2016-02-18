@@ -7,7 +7,7 @@
       <th colspan="3"></th>
     </tr>
   </thead>
-
+<% if @users %>
   <tbody>
     <% @users.each do |user| %>
       <tr>
@@ -15,4 +15,5 @@
       </tr>
     <% end %>
   </tbody>
+<% end %>
 </table>

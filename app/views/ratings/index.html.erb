@@ -51,9 +51,11 @@
       <div class="col-sm-9">
         <h3>Recent ratings</h3>
         <ul class="list-unstyled">
+          <% unless @recent.nil? %>
             <% @recent.each do |r| %>
               <li> <%= link_to r.beer.name, beer_path(r.beer) %> <%= r.score %>
                 <%= link_to r.user.username, user_path(r.user) %> </li>
+            <% end %>
           <% end %>
         </ul>
       </div>
