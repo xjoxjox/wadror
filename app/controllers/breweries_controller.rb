@@ -56,7 +56,9 @@ class BreweriesController < ApplicationController
   # DELETE /breweries/1
   # DELETE /breweries/1.json
   def destroy
-    @brewery.destroy
+    if is_admin
+      @brewery.destroy
+    end
     respond_to do |format|
       format.html { redirect_to breweries_url, notice: 'Brewery was successfully destroyed.' }
       format.json { head :no_content }
@@ -64,12 +66,14 @@ class BreweriesController < ApplicationController
   end
 
   def toggle_activity
-    brewery = Brewery.find(params[:id])
-    brewery.update_attribute :active, (not brewery.active)
+    if current_user.admin
+      brewery = Brewery.find(params[:id])
+      brewery.update_attribute :active, (not brewery.active)
 
-    new_status = brewery.active? ? "active" : "retired"
+      new_status = brewery.active? ? "active" : "retired"
 
-    redirect_to :back, notice:"brewery activity status changed to #{new_status}"
+      redirect_to :back, notice:"brewery activity status changed to #{new_status}"
+    end
   end
 
   private

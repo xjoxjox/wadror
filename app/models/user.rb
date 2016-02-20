@@ -16,15 +16,30 @@ class User < ActiveRecord::Base
   end
 
   def favorite_style
-    return nil if ratings.empty?
-    h = Beer.joins(:ratings).select("beers.style_id, ratings.score").group(:style_id).average(:score)
-    Style.find_by(id: h.key(h.values.max))
+    favorite :style
   end
 
   def favorite_brewery
+    favorite :brewery
+  end
+
+  def favorite(category)
     return nil if ratings.empty?
-    h = Brewery.joins(:ratings, :beers).select("breweries.name, ratings.score").group("breweries.name").average(:score)
-    Brewery.find_by(name: h.key(h.values.max))
+    rated = ratings.map{ |r| r.beer.send(category) }.uniq
+    rated.sort_by { |item| -rating_of(category, item) }.first
+  end
+
+  def rating_of(category, item)
+    ratings_of = ratings.select{ |r| r.beer.send(category)==item }
+    ratings_of.map(&:score).inject(&:+) / ratings_of.count.to_f
+  end
+
+  def froze_and_activate
+    if self.froze
+      self.update_attribute(:froze, false)
+    else
+      self.update_attribute(:froze, true)
+    end
   end
 
   def most_active_users(n)

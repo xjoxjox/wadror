@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :froze_and_activate]
 
   # GET /users
   # GET /users.json
@@ -61,6 +61,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def froze_and_activate
+    if current_user.admin
+      user = User.find(params[:id])
+      user.update_attribute :froze, (not user.froze)
+
+      new_status = user.froze? ? "frozen" : "activated"
+
+      redirect_to :back, notice:"users account has been #{new_status}"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -69,6 +80,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      params.require(:user).permit(:username, :password, :password_confirmation, :admin, :froze)
     end
 end
