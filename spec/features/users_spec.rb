@@ -9,7 +9,7 @@ describe "User" do
     it "can signin with right credentials" do
       sign_in(username:"Pekka", password:"Foobar1")
 
-      expect(page).to have_content 'Welcome back!'
+      expect(page).to have_content 'Welcome back, Pekka!'
       expect(page).to have_content 'Pekka'
     end
 
