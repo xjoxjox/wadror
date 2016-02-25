@@ -22,6 +22,5 @@ module Ratebeer
     # config.i18n.default_locale = :de
 
     config.autoload_paths += Dir["#{Rails.root}/lib"]
-    config.filter_parameters << :password
   end
 end

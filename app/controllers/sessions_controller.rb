@@ -6,9 +6,6 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by username: params[:username]
     if user && user.authenticate(params[:password]) && !user.froze
-      temp_session = session.dup
-      reset_session
-      session.replace(temp_session)
       session[:user_id] = user.id
       redirect_to user_path(user), notice: "Welcome back, #{user.username}!"
     elsif user && user.froze
