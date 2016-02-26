@@ -1,11 +1,22 @@
 require 'rails_helper'
+require 'capybara'
 
 include Helpers
-
 
 describe "Beerlist page" do
 
   before :all do
+
+    Capybara.register_driver :selenium do |app|
+
+      custom_profile = Selenium::WebDriver::Firefox::Profile.new
+
+      # Turn off the super annoying popup!
+      custom_profile["network.http.prompt-temp-redirect"] = false
+
+      Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => custom_profile)
+    end
+    
     self.use_transactional_fixtures = false
     WebMock.disable_net_connect!(allow_localhost:true)
   end
@@ -65,4 +76,5 @@ describe "Beerlist page" do
     expect(find('table').find('tr:nth-child(3)')).to have_content "Koff"
     expect(find('table').find('tr:nth-child(4)')).to have_content "Schlenkerla"
   end
+
 end

@@ -11,6 +11,15 @@ script:
 gemfile:
 - "/ratebeer/Gemfile"
 
+before_script:
+"/etc/init.d/xvfb start"
+
+script:
+DISPLAY=localhost:1.0 xvfb-run bundle exec rake spec
+
+after_script:
+"/etc/init.d/xvfb stop"
+
 deploy:
   provider: heroku
   api_key:
