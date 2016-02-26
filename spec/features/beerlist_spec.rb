@@ -5,6 +5,18 @@ include Helpers
 
 describe "Beerlist page" do
 
+  setup do
+    Capybara.register_driver :selenium do |app|
+
+      custom_profile = Selenium::WebDriver::Firefox::Profile.new
+
+      # Turn off the super annoying popup!
+      custom_profile["network.http.prompt-temp-redirect"] = false
+
+      Capybara::Selenium::Driver.new(:app => app, :browser => :firefox, :profile => custom_profile)
+    end
+  end
+  
   before :all do
     self.use_transactional_fixtures = false
     WebMock.disable_net_connect!(allow_localhost:true)
