@@ -56,6 +56,8 @@ group :development, :test do
   gem 'travis'
   gem 'webmock', :group => :test
   gem 'rails_layout'
+  gem 'selenium-webdriver', :group => :test
+  gem 'database_cleaner', :group => :test
 end
 
 group :production do
@@ -66,5 +68,6 @@ end
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'httparty'
+gem 'jquery-turbolinks'
 
 ruby '2.1.5'

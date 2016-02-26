@@ -5,8 +5,26 @@ class BreweriesController < ApplicationController
   # GET /breweries
   # GET /breweries.json
   def index
+    @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+
+    order = params[:order] || 'name'
+
+    if order == 'name'
+      @active_breweries = @active_breweries.sort_by{ |b| b.name }
+      @retired_breweries = @retired_breweries.sort_by{ |b| b.name }
+    elsif order == 'year'
+      if session[:brewery_order]
+        @active_breweries = @active_breweries.sort_by{ |b| b.year }.reverse
+        @retired_breweries = @retired_breweries.sort_by{ |b| b.year }.reverse
+        session[:brewery_order] = false
+      else
+        @active_breweries = @active_breweries.sort_by{ |b| b.year }
+        @retired_breweries = @retired_breweries.sort_by{ |b| b.year }
+        session[:brewery_order] = true
+      end
+    end
   end
 
   # GET /breweries/1
@@ -76,6 +94,9 @@ class BreweriesController < ApplicationController
     end
   end
 
+  def nglist
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_brewery
@@ -86,4 +107,4 @@ class BreweriesController < ApplicationController
     def brewery_params
       params.require(:brewery).permit(:name, :year, :active)
     end
-end
+  end
