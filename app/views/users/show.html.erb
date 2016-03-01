@@ -36,17 +36,33 @@
 </ul>
 <% end %>
 
-<% if @user.beer_clubs %>
+<% unless @confirmed_clubs.nil? %>
     <p>
       <strong>Member of BeerClubs</strong>
     </p>
 
     <ul class="list-unstyled">
-      <% @user.beer_clubs.each do |beer_club| %>
+      <% @confirmed_clubs.each do |beer_club| %>
           <li> <%= link_to beer_club.name, beer_club_path(beer_club)%> </li>
       <% end %>
     </ul>
 <% end %>
+
+<br>
+
+<% unless @pending_clubs.nil? %>
+    <p>
+      <strong>Membership waiting approval to</strong>
+    </p>
+
+    <ul class="list-unstyled">
+      <% @pending_clubs.each do |beer_club| %>
+          <li> <%= link_to beer_club.name, beer_club_path(beer_club)%> </li>
+      <% end %>
+    </ul>
+<% end %>
+
+<br>
 
 <%= link_to('Edit', url_for([:edit, @user]), class:"btn btn-primary") if current_user == @user || is_admin %>
 <%= link_to('Destroy', @user, method: :delete,

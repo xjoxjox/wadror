@@ -10,6 +10,17 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    confirmed_memberships = Membership.confirmed.where(user_id: @user.id)
+    @confirmed_clubs = []
+    confirmed_memberships.each do |c|
+      @confirmed_clubs << BeerClub.find_by(id: c.beer_club_id)
+    end
+
+    pending_memberships = Membership.pending.where(user_id: @user.id)
+    @pending_clubs = []
+    pending_memberships.each do |c|
+      @pending_clubs << BeerClub.find_by(id: c.beer_club_id)
+    end
   end
 
   # GET /users/new

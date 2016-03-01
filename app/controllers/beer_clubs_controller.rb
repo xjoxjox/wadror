@@ -11,6 +11,16 @@ class BeerClubsController < ApplicationController
   # GET /beer_clubs/1
   # GET /beer_clubs/1.json
   def show
+    confirmed_memberships = Membership.confirmed.where(beer_club_id: @beer_club.id)
+    @confirmed_members = []
+    confirmed_memberships.each do |c|
+      @confirmed_members << User.find_by(id: c.user_id)
+    end
+    pending_memberships = Membership.pending.where(beer_club_id: @beer_club.id)
+    @pending_members = []
+    pending_memberships.each do |c|
+      @pending_members << User.find_by(id: c.user_id)
+    end
     if current_user && @beer_club.members.exclude?(current_user)
       @membership = Membership.new
       @membership.user = current_user
@@ -37,6 +47,7 @@ class BeerClubsController < ApplicationController
 
     respond_to do |format|
       if @beer_club.save
+        Membership.create beer_club_id: @beer_club.id, user_id: current_user.id, pending: false
         format.html { redirect_to @beer_club, notice: 'BeerClub was successfully created.' }
         format.json { render :show, status: :created, location: @beer_club }
       else
@@ -70,6 +81,15 @@ class BeerClubsController < ApplicationController
       format.html { redirect_to beer_clubs_url, notice: 'BeerClub was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def confirm_membership
+      membership = Membership.find_by(beer_club_id: params[:beer_club_id], user_id: params[:user_id])
+      membership.update_attribute :pending, (false)
+
+      member = User.find_by(id: params[:user_id]).username
+
+      redirect_to :back, notice:"Membership confirmed to #{member}"
   end
 
   private

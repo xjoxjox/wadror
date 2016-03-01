@@ -27,12 +27,13 @@ class MembershipsController < ApplicationController
   # POST /memberships.json
   def create
     @membership = Membership.create(membership_params)
+    @membership.update_attribute :pending, true
 
     respond_to do |format|
       if @membership.save
         current_user.memberships << @membership
         format.html { redirect_to beer_club_path(@membership.beer_club),
-                                  notice: "#{@membership.user.username}, welcome to the club!" }
+                                  notice: "#{@membership.user.username}, your membership must be approved by other member" }
         format.json { render :show, status: :created, location: @membership }
       else
         @beer_clubs = BeerClub.all

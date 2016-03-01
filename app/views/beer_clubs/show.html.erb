@@ -6,11 +6,11 @@
 Founded <%= @beer_club.founded %>
 </p>
 
-<% if @beer_club.members %>
+<% if @confirmed_members %>
     <strong>Members</strong>
 
     <ul class="list-unstyled">
-      <% @beer_club.members.each do |member| %>
+      <% @confirmed_members.each do |member| %>
           <li> <%= link_to member.username, user_path(member) %> </li>
       <% end %>
     </ul>
@@ -23,11 +23,25 @@ Founded <%= @beer_club.founded %>
     <% end %>
 <% end %>
 
-<% if current_user && @beer_club.members.include?(current_user) %>
+<% if current_user && @confirmed_members.include?(current_user) %>
+    <% unless @pending_members.nil? %>
+        <strong>Pending memberships</strong>
+
+        <ul class="list-unstyled">
+          <% @pending_members.each do |member| %>
+              <li> <%= link_to member.username, user_path(member) %>
+                <%= link_to "confirm", confirm_membership_beer_club_path(:beer_club_id => @beer_club.id, :user_id => member.id),
+                            method: :post, class: "btn btn-primary btn-xs" if current_user && @confirmed_members.include?(current_user) %></li>
+          <% end %>
+        </ul>
+    <% end %>
+
+    <br>
+
   <%= form_for(@membership, method: "delete") do |f| %>
     <%= f.hidden_field :beer_club_id %>
     <%= f.submit value: "end the membership", class:"btn btn-primary" %>
   <% end %>
 <% end %>
 
-<%= edit_and_destroy_buttons(@beer_club) if current_user %>
+<%= edit_and_destroy_buttons(@beer_club) if current_user && @confirmed_members.include?(current_user) %>
