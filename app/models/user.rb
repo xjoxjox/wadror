@@ -52,10 +52,8 @@ class User < ActiveRecord::Base
   end
 
   def self.create_with_omniauth(auth)
-    create! do |user|
-      user.username = auth["name"]
-      pass = [*('A'..'Z'),*('0'..'9')].shuffle[0,8].join
-      user.password =  pass
-    end
+    pass = [*('a'..'z'),*('0'..'9')].shuffle[0,8].join + "A"
+    user = User.create id:(User.last.id + 1), username:auth["nickname"] + " GH", password:pass,
+                        password_confirmation:pass, admin:false, froze:false
   end
 end

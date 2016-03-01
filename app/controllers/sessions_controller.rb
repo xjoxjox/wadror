@@ -17,7 +17,6 @@ class SessionsController < ApplicationController
 
   def create_oauth
     auth = request.env["omniauth.auth"].info
-    beybug
     user = User.find_by(:username => auth["name"]) || User.create_with_omniauth(auth)
     if user && !user.froze
       session[:user_id] = user.id
