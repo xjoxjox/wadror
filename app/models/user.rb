@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, -> { distinct }, through: :memberships
   has_secure_password
-  validates :username, uniqueness: true, length: { minimum: 3, maximum: 15}
+  validates :username, uniqueness: true, length: { minimum: 3, maximum: 30}
   validates :password, :format => {:with => /\A(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{4,}\z/, message:
       "must be at least 4 characters and include one number and one capital letter."}
 
@@ -53,8 +53,7 @@ class User < ActiveRecord::Base
 
   def self.create_with_omniauth(auth)
     create! do |user|
-      user.id = auth["uid"]
-      user.username = auth["info"]["name"]
+      user.username = auth["name"]
       pass = [*('A'..'Z'),*('0'..'9')].shuffle[0,8].join
       user.password =  pass
     end

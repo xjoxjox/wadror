@@ -16,8 +16,8 @@ class SessionsController < ApplicationController
   end
 
   def create_oauth
-    auth = request.env["omniauth.auth"]
-    user = User.find_by(:id => auth["uid"]) || User.create_with_omniauth(auth)
+    auth = request.env["omniauth.auth"].info
+    user = User.find_by(:username => auth["name"]) || User.create_with_omniauth(auth)
     if user && !user.froze
       session[:user_id] = user.id
       redirect_to  user_path(user), notice: "Welcome back, #{user.username}!"
