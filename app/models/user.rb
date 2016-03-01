@@ -4,11 +4,14 @@ class User < ActiveRecord::Base
   has_many :beers, through: :ratings
   has_many :memberships, dependent: :destroy
   has_many :beer_clubs, -> { distinct }, through: :memberships
-  has_secure_password
-  validates :username, uniqueness: true, length: { minimum: 3,
-                                                   maximum: 15}
+  has_secure_password unless :github
+  validates :username, uniqueness: true, length: { minimum: 3, maximum: 15} unless :github
   validates :password, :format => {:with => /\A(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{4,}\z/, message:
-      "must be at least 4 characters and include one number and one capital letter."}
+      "must be at least 4 characters and include one number and one capital letter."} unless :github
+
+  def github_user
+    self.github
+  end
 
   def favorite_beer
     return nil if ratings.empty?
@@ -50,5 +53,13 @@ class User < ActiveRecord::Base
       hash[u] = value
     end
     hash
+  end
+
+  def self.create_with_omniauth(auth)
+    create! do |user|
+      user.id = auth["uid"]
+      user.username = auth["name"]
+      user.github = true
+    end
   end
 end

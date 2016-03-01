@@ -48,16 +48,16 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'guard'
   gem 'guard-rspec', require: false
-  gem 'factory_girl_rails', :group => :test
-  gem 'capybara', :group => :test
-  gem 'launchy', :group => :test
-  gem 'rspec-its', :group => :test
   gem 'simplecov', require: false
   gem 'travis'
-  gem 'webmock', :group => :test
   gem 'rails_layout'
+  gem 'capybara', :group => :test
+  gem 'factory_girl_rails', :group => :test
+  gem 'launchy', :group => :test
+  gem 'webmock', :group => :test
+  gem 'rspec-its', :group => :test
   gem 'selenium-webdriver', :group => :test
-  gem 'database_cleaner', :group => :test
+  gem 'database_cleaner', :group => :est
 end
 
 group :production do
@@ -70,5 +70,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'httparty'
 gem 'jquery-turbolinks'
 gem 'rack-mini-profiler'
+gem 'omniauth-github'
 
 ruby '2.1.5'

@@ -1,19 +1,22 @@
-<p>
-  <strong>Name:</strong>
-  <%= @beer.name %>
-</p>
+<% cache @beer do %>
 
-<p>
-  <strong>Style:</strong>
-  <%= link_to @beer.style.name, style_path(@beer.style) %>
-</p>
+  <p>
+    <h2><%= @beer.name %></h2>
+  </p>
 
-<p>
-  <strong>Brewery:</strong>
-  <%= link_to @beer.brewery.name, brewery_path(@beer.brewery) %>
-</p>
+  <p>
+    <strong>Style:</strong>
+    <%= link_to @beer.style.name, style_path(@beer.style) %>
+  </p>
 
-<p>Beer has <%= pluralize(@beer.ratings.count, 'rating') %>, average <%= round(@beer.average_rating) %></p>
+  <p>
+    <strong>Brewed by:</strong>
+    <%= link_to @beer.brewery.name, brewery_path(@beer.brewery) %>
+  </p>
+
+  <p>Beer has <%= pluralize(@beer.ratings.count, 'rating') %>, average <%= round(@beer.average_rating) %></p>
+
+<% end %>
 
 <% if current_user %>
 
