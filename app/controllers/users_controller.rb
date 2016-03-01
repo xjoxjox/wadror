@@ -36,6 +36,8 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.update_attribute :admin, false
+    @user.update_attribute :froze, false
     respond_to do |format|
       if @user.save
         format.html { redirect_to signin_path, notice: 'User was successfully created.' }

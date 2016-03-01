@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
 
   def self.create_with_omniauth(auth)
     pass = [*('a'..'z'),*('0'..'9')].shuffle[0,8].join + "A"
-    user = User.create id:(User.last.id + 1), username:auth["nickname"] + " GH", password:pass,
+    user = User.create id:(User.last.id + 1000), username:auth["nickname"] + " GH", password:pass,
                         password_confirmation:pass, admin:false, froze:false
   end
 end
